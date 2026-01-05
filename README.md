@@ -6,11 +6,16 @@ This project documents my hands-on experience building a virtualized enterprise 
 
 ---
 
-## 🏗️ Phase 1: Virtualization & Server Setup
-**Goal:** Deploying the foundation for domain services.
-* **Activity:** Provisioned multiple Windows Server 2022 instances.
-* **Key Tasks:** Configured static IP addressing, system partitioning, and analyzed **Thin vs. Thick provisioning** for disk efficiency.
-* **Skill Gained:** Understanding hardware resource allocation for virtualized servers.
+## 🏗️ Phase 1: Bare-Metal Virtualization (VMware ESXi)
+**Goal:** Deploying a high-performance lab environment using a Type-1 Hypervisor.
+
+* **Hypervisor:** VMware ESXi 7.0 Update 2.
+* **Implementation:** Provisioned virtual machines (including `mideTestServer`) to serve as domain nodes.
+* **Hardware Specs:** Allocated 2 vCPUs and 4GB RAM per core instance to balance host performance and guest stability.
+* **Storage:** Utilized a local datastore (`datastore1`) with 52GB allocation for system drives.
+* **Technical Decision:** Implemented **Thin Provisioning** to optimize physical storage usage while maintaining scalability for additional domain clones.
+
+![VMware ESXi VM Provisioning](images/esxi-vm-provisioning.png)
 
 ---
 
