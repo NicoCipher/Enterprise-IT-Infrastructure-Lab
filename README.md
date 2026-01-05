@@ -13,32 +13,34 @@ This project documents my hands-on experience building a virtualized enterprise 
 * **Implementation:** Provisioned virtual machines (including `mideTestServer`) to serve as domain nodes.
 * **Hardware Specs:** Allocated 2 vCPUs and 4GB RAM per core instance to balance host performance and guest stability.
 * **Storage:** Utilized a local datastore (`datastore1`) with 52GB allocation for system drives.
-* **Technical Decision:** Implemented **Thin Provisioning** to optimize physical storage usage while maintaining scalability for additional domain clones.
+* **Technical Decision:** Implemented **Thin Provisioning** to optimize physical storage usage.
 
 ![VMware ESXi VM Provisioning](images/esxi-vm-provisioning.png)
 
 ---
 
 ## 🌐 Phase 2: DNS & Network Connectivity
-**Goal:** Ensuring reliable name resolution.
+**Goal:** Ensuring reliable name resolution and domain communication.
 * **Implementation:** Configured Forward and Reverse Lookup Zones.
 * **Troubleshooting (The Firewall Blocker):** Resolved a server visibility issue by identifying and configuring **Windows Firewall** exceptions for ICMP and DNS traffic.
-* **Advanced Fix (Restricted Dynamic Updates):** Identified that restricted updates were blocking SRV records, preventing new nodes from joining the domain. Resolved by enabling **Secure Dynamic Updates**.
+* **Advanced Fix:** Resolved an issue with **Secure Dynamic Updates** that was preventing SRV record registration.
 
 ---
 
 ## 🛡️ Phase 3: Active Directory & Group Policy (GPO)
 **Goal:** Centralized identity and security governance.
 * **Implementation:** Promoted a Domain Controller (DC) and designed a structured **OU hierarchy**.
-* **Troubleshooting (The Privilege Gap):** Resolved an issue where new users couldn't log in by auditing **Security Descriptors** and Group Memberships.
-* **Security Hardening (GPO):** Implemented a Password Lockout Policy. Used `gpresult /r` and `gpupdate /force` to find a logic error (Time-based vs. Manual Admin unlock) and corrected it.
+* **Governance:** Created dedicated OUs for Users, Computers, and Admin accounts to apply granular policies.
+* **Security Hardening (GPO):** Implemented a Password Lockout Policy and used `gpresult /r` to verify application.
+
+![Active Directory OU Structure](images/ad-ou-structure.png)
 
 ---
 
 ## 🔧 Phase 4: Advanced Troubleshooting (The "Trust" Fix)
 **Goal:** Recovering from critical domain failures.
 * **The Problem:** Workstation `testMideComputer` failed to authenticate with a "Trust Relationship" error.
-* **The Root Cause:** Identified a password de-sync between the local machine and Active Directory.
+* **The Root Cause:** Identified a password de-sync between the local machine and Active Directory (Secure Channel failure).
 * **The Fix:** Performed a **Secure Channel Reset** by disjoining and re-joining the machine to the domain.
 
 ---
@@ -46,7 +48,7 @@ This project documents my hands-on experience building a virtualized enterprise 
 ## 🐧 Phase 5: Hybrid Environment (Ubuntu Linux)
 **Goal:** Managing cross-platform OS persistence.
 * **The Issue:** Ubuntu VM reverted to an "uninstalled" state after shutdown.
-* **The Fix:** Identified the installer was still mapped to the ISO. Completed the full disk installation and unmapped the virtual drive to ensure OS persistence.
+* **The Fix:** Identified the installer ISO was still mapped. Unmapped the virtual drive to ensure the system booted from the virtual disk.
 
 ---
 
@@ -54,6 +56,5 @@ This project documents my hands-on experience building a virtualized enterprise 
 | Tool | Command |
 | :--- | :--- |
 | **DNS** | `nslookup [hostname]` |
-| **GPO** | `gpupdate /force` |
 | **GPO Audit** | `gpresult /r` |
 | **AD Trust** | `Test-ComputerSecureChannel -Verify -Repair` |
