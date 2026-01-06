@@ -20,12 +20,14 @@ This project documents my hands-on experience building a virtualized enterprise 
 ---
 
 ## 🌐 Phase 2: DNS & Network Connectivity
-**Goal:** Ensuring reliable name resolution and domain communication.
-* **Implementation:** Configured Forward and Reverse Lookup Zones.
-* **Troubleshooting (The Firewall Blocker):** Resolved a server visibility issue by identifying and configuring **Windows Firewall** exceptions for ICMP and DNS traffic.
-* **Advanced Fix:** Resolved an issue with **Secure Dynamic Updates** that was preventing SRV record registration.
+**Goal:** Establishing a reliable naming service for domain-wide communication.
 
----
+* **Implementation:** Configured Active Directory-Integrated DNS with Forward and Reverse Lookup Zones.
+* **Network Baseline:** Assigned static IP addressing to prevent service disruption and ensured DNS pointing to the local loopback (`127.0.0.1`) for the DC.
+* **Troubleshooting (The Firewall Blocker):** Resolved a "Request Timed Out" issue during `nslookup` tests by creating custom **Inbound Rules** in Windows Firewall for Port 53 (DNS) and ICMP.
+* **Resolution:** Verified SRV record registration using `dnscmd`, ensuring clients can locate the Domain Controller services.
+
+![DNS Forward Lookup Zones](images/dns-forward-lookup.png)
 
 ## 🛡️ Phase 3: Active Directory & Group Policy (GPO)
 **Goal:** Centralized identity and security governance.
