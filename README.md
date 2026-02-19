@@ -24,6 +24,7 @@ This project documents the design, deployment, and troubleshooting of a fully vi
 > | COMP1 | Domain-Joined Workstation | `192.168.0.171` |
 > | LDAP2ConnectionAgent | LDAP Test Machine | `192.168.0.110` |
 > | mideTestServer | Additional Server VM | Internal |
+> | Supporttrainee / testRSConnectionAgent | Lab Workstations | Internal |
 
 ---
 
@@ -38,7 +39,7 @@ This project documents the design, deployment, and troubleshooting of a fully vi
 | DNS | Active Directory-Integrated DNS (Forward + Reverse Lookup Zones) |
 | Identity & Policy | Group Policy Objects (GPO), Organizational Units (OUs) |
 | Networking | VMware vSwitch, Static IP addressing, 192.168.0.0/24 |
-| Management Tools | Server Manager, ADDC, DNS Manager, PowerShell |
+| Management Tools | Server Manager, ADUC, DNS Manager, PowerShell |
 | Storage | VMware Thin Provisioned VMDK on `datastore1` (68 GB) |
 
 ---
@@ -69,7 +70,7 @@ This project documents the design, deployment, and troubleshooting of a fully vi
 
 ---
 
-## Results / Validation
+## ✅ Results / Validation
 
 **Domain Controller Promotion**
 - `nicoDC` successfully promoted to Primary DC; `nico.local` domain operational
@@ -143,20 +144,23 @@ Enterprise-IT-Infrastructure-Lab/
 
 ---
 
-## Screenshots
+## 📸 Screenshots
 
-| Phase | Screenshot |
-|---|---|
-| ESXi VM Provisioning | `images/esxi-vm-provisioning.png` |
-| AD DS Installation Progress | `images/ad-ds-install.png` |
-| DC Promotion | `images/dc-promotion.png` |
-| nicoDC joined to nico.local | `images/nicodc-domain.png` |
-| DNS Forward Lookup Zone | `images/dns-forward-lookup.png` |
-| DNS Forward Zones (Running) | `images/dns-zones-running.png` |
-| DNS Reverse Lookup Zone | `images/dns-reverse-lookup.png` |
-| COMP1 Domain Join Success | `images/comp1-domain-join.png` |
-| Active Directory OU Structure | `images/ad-ou-structure.png` |
-| ADUC Computers Container | `images/aduc-computers.png` |
+| Phase | Description | File |
+|---|---|---|
+| Phase 1 | nicoDC — Server Manager Local Server properties | `images/esxi-vm-provisioning.png` |
+| Phase 2 | AD DS role installation progress | `images/ad-ds-install.png` |
+| Phase 2 | Post-deployment: promote server to Domain Controller | `images/dc-promotion.png` |
+| Phase 2 | nicoDC successfully joined to nico.local domain | `images/nicodc-domain.png` |
+| Phase 2 | DNS Manager — nico.local Forward Lookup Zone records | `images/dns-forward-lookup.png` |
+| Phase 3 | COMP1 — Windows 10 client desktop | `images/comp1-desktop.png` |
+| Phase 3 | COMP1 — "Welcome to the nico.local domain" confirmation | `images/comp1-domain-join.png` |
+| Phase 4 | Network connectivity troubleshooting on client VM | `images/network-troubleshooting.png` |
+| Phase 2 | DNS Manager — Host A records (COMP1, LDAP2, nicoDC) | `images/dns-host-a-records.png` |
+| Phase 2 | DNS Forward Lookup Zones — both zones status: Running | `images/dns-zones-running.png` |
+| Phase 2 | DNS Reverse Lookup Zone — PTR records verified | `images/dns-reverse-lookup.png` |
+| Phase 3 | ADUC — Full OU hierarchy + Taiwo Olumide user account | `images/ad-ou-structure.png` |
+| Phase 3 | ADUC — Computers container (COMP1, LDAP2CONNECTION) | `images/aduc-computers.png` |
 
 ---
 
