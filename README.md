@@ -24,7 +24,6 @@ This project documents the design, deployment, and troubleshooting of a fully vi
 > | COMP1 | Domain-Joined Workstation | `192.168.0.171` |
 > | LDAP2ConnectionAgent | LDAP Test Machine | `192.168.0.110` |
 > | mideTestServer | Additional Server VM | Internal |
-> | Supporttrainee / testRSConnectionAgent | Lab Workstations | Internal |
 
 ---
 
