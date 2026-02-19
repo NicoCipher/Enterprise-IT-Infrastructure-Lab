@@ -28,7 +28,7 @@ The objective was to design, deploy, break, fix, and validate a working enterpri
 
 ### Topology Diagram
 
-![Network Diagram](images/network-diagram.svg)
+![Network Diagram](images/network-diagram.png)
 
 **Flow:**  
 Physical Router → vmnic1 → vSwitch0 → ESXi Host → Virtual Machines
