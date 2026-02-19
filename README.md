@@ -24,7 +24,6 @@ This project documents the design, deployment, and troubleshooting of a fully vi
 > | COMP1 | Domain-Joined Workstation | `192.168.0.171` |
 > | LDAP2ConnectionAgent | LDAP Test Machine | `192.168.0.110` |
 > | mideTestServer | Additional Server VM | Internal |
-> | Supporttrainee / testRSConnectionAgent | Lab Workstations | Internal |
 
 ---
 
@@ -39,7 +38,7 @@ This project documents the design, deployment, and troubleshooting of a fully vi
 | DNS | Active Directory-Integrated DNS (Forward + Reverse Lookup Zones) |
 | Identity & Policy | Group Policy Objects (GPO), Organizational Units (OUs) |
 | Networking | VMware vSwitch, Static IP addressing, 192.168.0.0/24 |
-| Management Tools | Server Manager, ADUC, DNS Manager, PowerShell |
+| Management Tools | Server Manager, ADDC, DNS Manager, PowerShell |
 | Storage | VMware Thin Provisioned VMDK on `datastore1` (68 GB) |
 
 ---
@@ -70,7 +69,7 @@ This project documents the design, deployment, and troubleshooting of a fully vi
 
 ---
 
-## ✅ Results / Validation
+## Results / Validation
 
 **Domain Controller Promotion**
 - `nicoDC` successfully promoted to Primary DC; `nico.local` domain operational
@@ -144,7 +143,7 @@ Enterprise-IT-Infrastructure-Lab/
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 | Phase | Screenshot |
 |---|---|
