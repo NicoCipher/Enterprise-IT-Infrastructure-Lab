@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" width="900" height="620" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f1923;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a2a3a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="esxiBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a5f;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#0d2137;stop-opacity:0.8" />
+    </linearGradient>
+    <linearGradient id="serverGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4" />
+      <stop offset="100%" style="stop-color:#005a9e" />
+    </linearGradient>
+    <linearGradient id="clientGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#107c10" />
+      <stop offset="100%" style="stop-color:#0a5e0a" />
+    </linearGradient>
+    <linearGradient id="dnsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#b83c00" />
+      <stop offset="100%" style="stop-color:#8a2d00" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4fc3f7"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#ffb74d"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#81c784"/>
+    </marker>
+  </defs>
+
+  <!-- Main background -->
+  <rect width="900" height="620" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="38" text-anchor="middle" fill="#e0f0ff" font-size="18" font-weight="700" letter-spacing="1">Enterprise IT Infrastructure Lab — Network Architecture</text>
+  <text x="450" y="56" text-anchor="middle" fill="#4fc3f7" font-size="11">Domain: nico.local | Subnet: 192.168.0.0/24 | Hypervisor: VMware ESXi 7.0</text>
+
+  <!-- Internet/Gateway box at top -->
+  <rect x="360" y="72" width="180" height="48" rx="8" fill="#2a1a00" stroke="#ffb74d" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="450" y="90" text-anchor="middle" fill="#ffb74d" font-size="11" font-weight="700">🌐 INTERNET / GATEWAY</text>
+  <text x="450" y="107" text-anchor="middle" fill="#ffd082" font-size="10">Physical Router / Home Network</text>
+
+  <!-- vSwitch / physical NIC layer -->
+  <rect x="200" y="148" width="500" height="34" rx="6" fill="#1a1a2e" stroke="#6c63ff" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="450" y="162" text-anchor="middle" fill="#a29bfe" font-size="10" font-weight="600">VMware vSwitch0 + New Switch  |  vmnic1 (Physical NIC)</text>
+  <text x="450" y="175" text-anchor="middle" fill="#6c63ff" font-size="9">Virtual Network Layer — 192.168.0.0/24</text>
+
+  <!-- Arrow: Gateway to vSwitch -->
+  <line x1="450" y1="120" x2="450" y2="148" stroke="#ffb74d" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
+
+  <!-- ESXi Host boundary -->
+  <rect x="30" y="200" width="840" height="370" rx="10" fill="url(#esxiBg)" stroke="#4fc3f7" stroke-width="1.5" stroke-dasharray="8,4" filter="url(#shadow)"/>
+  <text x="60" y="222" fill="#4fc3f7" font-size="11" font-weight="700">VMware ESXi 7.0 Host  |  datastore1 (68 GB)  |  Intel Xeon  |  4 GB RAM</text>
+
+  <!-- Arrow: vSwitch to ESXi -->
+  <line x1="450" y1="182" x2="450" y2="200" stroke="#6c63ff" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- ===== nicoDC (Primary DC) ===== -->
+  <rect x="60" y="238" width="190" height="130" rx="8" fill="url(#serverGrad)" filter="url(#shadow)"/>
+  <rect x="60" y="238" width="190" height="26" rx="8" fill="#005a9e"/>
+  <rect x="60" y="255" width="190" height="9" rx="0" fill="#005a9e"/>
+  <text x="155" y="256" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">🖥️  nicoDC</text>
+  <text x="155" y="272" text-anchor="middle" fill="#cce5ff" font-size="9.5">Primary Domain Controller</text>
+  <text x="155" y="287" text-anchor="middle" fill="#fff" font-size="9">Windows Server 2019 Standard</text>
+  <text x="155" y="301" text-anchor="middle" fill="#90caf9" font-size="9">IP: 192.168.0.129 (static)</text>
+  <text x="155" y="315" text-anchor="middle" fill="#90caf9" font-size="9">Domain: nico.local</text>
+  <text x="155" y="329" text-anchor="middle" fill="#ffe082" font-size="9">Roles: AD DS · DNS · GPO</text>
+  <text x="155" y="345" text-anchor="middle" fill="#ffe082" font-size="9">vCPU: 2  |  RAM: 4 GB  |  Disk: 63 GB</text>
+  <text x="155" y="360" text-anchor="middle" fill="#b3d9ff" font-size="9">UTC+01:00</text>
+
+  <!-- ===== SecondaryDC ===== -->
+  <rect x="280" y="238" width="175" height="130" rx="8" fill="#1e3a5f" stroke="#4fc3f7" stroke-width="1" filter="url(#shadow)"/>
+  <text x="367" y="258" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">🖥️  SecondaryDC</text>
+  <text x="367" y="274" text-anchor="middle" fill="#cce5ff" font-size="9.5">Secondary Domain Controller</text>
+  <text x="367" y="289" text-anchor="middle" fill="#fff" font-size="9">Windows Server 2019</text>
+  <text x="367" y="304" text-anchor="middle" fill="#90caf9" font-size="9">Domain: nico.local</text>
+  <text x="367" y="319" text-anchor="middle" fill="#ffe082" font-size="9">Roles: Backup AD DS</text>
+  <text x="367" y="334" text-anchor="middle" fill="#b3d9ff" font-size="9">Redundancy / Failover</text>
+
+  <!-- ===== COMP1 (Windows 10 Client) ===== -->
+  <rect x="480" y="238" width="175" height="130" rx="8" fill="url(#clientGrad)" filter="url(#shadow)"/>
+  <text x="567" y="258" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">💻  COMP1</text>
+  <text x="567" y="274" text-anchor="middle" fill="#c8e6c9" font-size="9.5">Domain-Joined Workstation</text>
+  <text x="567" y="289" text-anchor="middle" fill="#fff" font-size="9">Windows 10</text>
+  <text x="567" y="304" text-anchor="middle" fill="#a5d6a7" font-size="9">IP: 192.168.0.171</text>
+  <text x="567" y="319" text-anchor="middle" fill="#a5d6a7" font-size="9">Domain: nico.local ✔</text>
+  <text x="567" y="334" text-anchor="middle" fill="#ffe082" font-size="9">GPO Applied · AD Auth</text>
+  <text x="567" y="349" text-anchor="middle" fill="#c8e6c9" font-size="9">"Welcome to nico.local" ✔</text>
+
+  <!-- ===== Other VMs ===== -->
+  <rect x="680" y="238" width="165" height="130" rx="8" fill="#2a1a3e" stroke="#ce93d8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="762" y="258" text-anchor="middle" fill="#e1bee7" font-size="11" font-weight="700">📦  Other VMs</text>
+  <text x="762" y="276" text-anchor="middle" fill="#ce93d8" font-size="9.5">Supporttrainee</text>
+  <text x="762" y="291" text-anchor="middle" fill="#ce93d8" font-size="9.5">mideTestServer</text>
+  <text x="762" y="306" text-anchor="middle" fill="#ce93d8" font-size="9.5">testRSConnectionAgent</text>
+  <text x="762" y="321" text-anchor="middle" fill="#ce93d8" font-size="9.5">LDAP2ConnectionAgent</text>
+  <text x="762" y="336" text-anchor="middle" fill="#b39ddb" font-size="9">IP: 192.168.0.110</text>
+  <text x="762" y="351" text-anchor="middle" fill="#b39ddb" font-size="9">23 total VMs on host</text>
+
+  <!-- Connections from vSwitch to VMs -->
+  <line x1="155" y1="182" x2="155" y2="238" stroke="#4fc3f7" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <line x1="367" y1="182" x2="367" y2="238" stroke="#4fc3f7" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <line x1="567" y1="182" x2="567" y2="238" stroke="#4fc3f7" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <line x1="762" y1="182" x2="762" y2="238" stroke="#4fc3f7" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- DNS Flow box -->
+  <rect x="60" y="400" width="350" height="90" rx="8" fill="#1a1200" stroke="#ffb74d" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="235" y="420" text-anchor="middle" fill="#ffb74d" font-size="11" font-weight="700">🔁 DNS Resolution Flow</text>
+  <text x="235" y="438" text-anchor="middle" fill="#ffd082" font-size="9.5">1. COMP1 queries nicoDC (192.168.0.129) on Port 53</text>
+  <text x="235" y="453" text-anchor="middle" fill="#ffd082" font-size="9.5">2. nicoDC resolves via Forward Lookup Zone: nico.local</text>
+  <text x="235" y="468" text-anchor="middle" fill="#ffd082" font-size="9.5">3. Reverse Lookup Zone: 0.168.192.in-addr.arpa (PTR records)</text>
+  <text x="235" y="483" text-anchor="middle" fill="#ffcc80" font-size="9">SOA + NS + Host A + PTR records validated ✔</text>
+
+  <!-- AD OU Structure box -->
+  <rect x="440" y="400" width="405" height="90" rx="8" fill="#001a00" stroke="#81c784" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="642" y="420" text-anchor="middle" fill="#81c784" font-size="11" font-weight="700">🗂️ Active Directory — OU Structure (nico.local)</text>
+  <text x="642" y="438" text-anchor="middle" fill="#a5d6a7" font-size="9.5">OU_Users: Finance_Users | HR_Users | IT_Users | Sales_Users</text>
+  <text x="642" y="453" text-anchor="middle" fill="#a5d6a7" font-size="9.5">OU_Computers: Finance | HR | IT | Sales Computers</text>
+  <text x="642" y="468" text-anchor="middle" fill="#a5d6a7" font-size="9.5">OU_Servers: App_Servers | DB_Servers</text>
+  <text x="642" y="483" text-anchor="middle" fill="#c8e6c9" font-size="9">OU_ServiceAccounts | Domain Controllers | Users</text>
+
+  <!-- DNS arrow from DC to DNS flow -->
+  <line x1="155" y1="368" x2="155" y2="400" stroke="#ffb74d" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowOrange)"/>
+
+  <!-- AD arrow from DC to AD box -->
+  <line x1="250" y1="368" x2="540" y2="400" stroke="#81c784" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowGreen)"/>
+
+  <!-- GPO / Firewall note -->
+  <rect x="60" y="510" width="840" height="48" rx="6" fill="#12121f" stroke="#7c7cff" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="450" y="530" text-anchor="middle" fill="#9999ff" font-size="10" font-weight="600">🛡️ Security Hardening Applied</text>
+  <text x="450" y="547" text-anchor="middle" fill="#8888dd" font-size="9">GPO: Password Lockout Policy enforced  |  Windows Firewall: Custom Inbound Rules (Port 53 DNS + ICMP)  |  Secure Channel reset via PowerShell  |  gpresult /r verified</text>
+
+  <!-- Legend -->
+  <rect x="60" y="574" width="840" height="30" rx="5" fill="#0a0a15"/>
+  <rect x="80" y="583" width="12" height="12" rx="2" fill="#0078d4"/>
+  <text x="96" y="593" fill="#ccc" font-size="9">Domain Controller</text>
+  <rect x="200" y="583" width="12" height="12" rx="2" fill="#107c10"/>
+  <text x="216" y="593" fill="#ccc" font-size="9">Client Workstation</text>
+  <rect x="330" y="583" width="12" height="12" rx="2" fill="#6c63ff"/>
+  <text x="346" y="593" fill="#ccc" font-size="9">Virtual Network / vSwitch</text>
+  <rect x="490" y="583" width="12" height="12" rx="2" fill="#b83c00"/>
+  <text x="506" y="593" fill="#ccc" font-size="9">DNS Zone</text>
+  <rect x="570" y="583" width="12" height="12" rx="2" fill="#ffb74d" rx="2"/>
+  <text x="586" y="593" fill="#ccc" font-size="9">Gateway / Internet</text>
+  <rect x="690" y="583" width="12" height="12" rx="2" fill="#2a1a3e" stroke="#ce93d8" stroke-width="1"/>
+  <text x="706" y="593" fill="#ccc" font-size="9">Additional VMs</text>
+</svg>
